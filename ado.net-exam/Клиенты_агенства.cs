@@ -14,7 +14,7 @@ namespace ado.net_exam
     
     public partial class Клиенты_агенства
     {
-        public int CustomerId { get; set; }
+        public int CustomerId { get; set; }//customer id
         public string FIO { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }

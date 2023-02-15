@@ -64,22 +64,44 @@
                     </Grid.RowDefinitions>
                     <TabControl Grid.RowSpan="2">
                         <TabItem Header="В туре ли клиент">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <TextBlock Name="in_tourD"   Margin="220,34,65,172"/>
+                                <Button Name="show_intour" Content="Показать" HorizontalAlignment="Left" Margin="76,103,0,0" VerticalAlignment="Top" Height="34" Width="78" Click="show_intour_Click"/>
+                                <TextBox Name="text_in_tour" HorizontalAlignment="Left" Margin="70,60,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Список туров клиента">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid Name="tour_customerD"  d:ItemsSource="{d:SampleData ItemCount=5}" Margin="285,51,0,156"/>
+                                <Button Name="show_tour_customer" Content="Показать" HorizontalAlignment="Left" Margin="76,103,0,0" VerticalAlignment="Top" Height="34" Width="78" Click="show_tour_customer_Click"/>
+                                <TextBox Name="tour_customer_text" HorizontalAlignment="Left" Margin="70,60,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"   AcceptsReturn="True"/>
+                            </Grid>
                         </TabItem>
-                        <TabItem Header="Обновить клиента">
-                            <Grid Background="#FFE5E5E5"/>
-                        </TabItem>
+
                         <TabItem Header="Удалить клиента">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <Button Name="delete_customer" Content="Удалить" HorizontalAlignment="Left" Margin="76,103,0,0" VerticalAlignment="Top" Height="34" Width="78" Click="delete_customer_Click"/>
+                                <TextBox Name="email" HorizontalAlignment="Left" Margin="70,60,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Вставить клиента">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <RichTextBox Name="InsertData" Margin="0,0,567,264">
+                                    <FlowDocument>
+                                        <Paragraph>
+                                            <Run Text="RichTextBox"/>
+                                        </Paragraph>
+                                    </FlowDocument>
+                                </RichTextBox>
+                                <Button Name="bt_insert" Content="Вставить" HorizontalAlignment="Left" Margin="72,155,0,0" VerticalAlignment="Top" Height="34" Width="78" Click="Click_Insert"/>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Таблица клиентов">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid Name="table_customerD"  d:ItemsSource="{d:SampleData ItemCount=5}" Margin="107,51,135,130"/>
+                            </Grid>
                         </TabItem>
                     </TabControl>
                 </Grid>
@@ -90,13 +112,23 @@
                 <Grid Background="#FFE5E5E5">
                     <TabControl>
                         <TabItem Header="Популярный турист">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid Name="popular_touristD"  d:ItemsSource="{d:SampleData ItemCount=5}" Margin="107,51,135,130"/>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Количество посещенных стран">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <TextBlock Name="visit_countryD"  Margin="220,34,65,172"/>
+                                <Button Name="visit_show" Content="Показать" HorizontalAlignment="Left" Margin="76,103,0,0" VerticalAlignment="Top" Height="34" Width="78" Click="visit_show_Click"/>
+                                <TextBox Name="country_visit" HorizontalAlignment="Left" Margin="70,60,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Где находится турист">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid Name="whereD"  d:ItemsSource="{d:SampleData ItemCount=5}" Margin="220,34,65,172"/>
+                                <Button Name="where_show" Content="Показать" HorizontalAlignment="Left" Margin="76,103,0,0" VerticalAlignment="Top" Height="34" Width="78" Click="where_show_Click"/>
+                                <TextBox Name="where_text" HorizontalAlignment="Left" Margin="70,60,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                            </Grid>
                         </TabItem>
 
 
@@ -107,19 +139,33 @@
                 <Grid Background="#FFE5E5E5">
                     <TabControl>
                         <TabItem Header="Города">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid Name="cities"  d:ItemsSource="{d:SampleData ItemCount=5}" Margin="107,51,135,130"/>
+
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Страны">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid Name="countries"  d:ItemsSource="{d:SampleData ItemCount=5}" Margin="107,51,135,130"/>
+
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Гостиницы">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid Name="hotels"  d:ItemsSource="{d:SampleData ItemCount=5}" Margin="107,51,135,130"/>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Достопримечательности">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid Name="seeing"  d:ItemsSource="{d:SampleData ItemCount=5}" Margin="107,51,135,130"/>
+
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Работники турагенства">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid Name="workers"  d:ItemsSource="{d:SampleData ItemCount=5}" Margin="107,51,135,130"/>
+
+                            </Grid>
                         </TabItem>
 
 

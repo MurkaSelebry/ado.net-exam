@@ -33,5 +33,10 @@ namespace ado.net_exam
           //  if (mCB.SelectedItem == "Admin")
                 new AdminWindow().Show();
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            new UserWindow().Show();
+        }
     }
 }

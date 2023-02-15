@@ -7,6 +7,10 @@
         mc:Ignorable="d"
         Title="UserWindow" Height="450" Width="800">
     <Grid>
-        
+        <DataGrid Name="tours"  d:ItemsSource="{d:SampleData ItemCount=5}" Margin="285,51,0,156"/>
+        <Button Name="show" Content="Показать" HorizontalAlignment="Left" Margin="76,103,0,0" VerticalAlignment="Top" Height="34" Width="78" Click="show_Click"/>
+        <TextBox Name="fio" HorizontalAlignment="Left" Margin="70,60,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Мои туры" HorizontalAlignment="Left" Margin="285,10,0,0" VerticalAlignment="Top"/>
+
     </Grid>
 </Window>

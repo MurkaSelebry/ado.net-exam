@@ -95,7 +95,10 @@ namespace ado.net_exam.DataLayer
             {
                 using (var db = new Tourist_Entities())
                 {
-                    db.Клиенты_агенства.Add(customer);
+                    var customers = db.Set<Клиенты_агенства>();
+                    customers.Add(new Клиенты_агенства { 
+                        FIO=customer.FIO,Phone=customer.Phone,Email=customer.Email,DateOfBirth=customer.DateOfBirth,FutureTours=customer.FutureTours,PastTours=customer.PastTours });
+
                     db.SaveChanges();
                 }
             }

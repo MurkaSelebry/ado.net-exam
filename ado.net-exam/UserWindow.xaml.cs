@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using ado.net_exam.DataLayer;
 namespace ado.net_exam
 {
     /// <summary>
@@ -22,6 +22,11 @@ namespace ado.net_exam
         public UserWindow()
         {
             InitializeComponent();
+        }
+
+        private void show_Click(object sender, RoutedEventArgs e)
+        {
+            tours.ItemsSource = DL.customers.listOfTours(fio.Text);
         }
     }
 }
