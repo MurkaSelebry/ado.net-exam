@@ -1,0 +1,133 @@
+﻿<Window x:Class="ado.net_exam.AdminWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ado.net_exam"
+        mc:Ignorable="d"
+        Title="AdminWindow" Height="450" Width="800">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Туры">
+                <Grid Background="#FFE5E5E5">
+                    <TabControl>
+                        <TabItem Header="Туры в диапазоне">
+                            <Grid Background="#FFE5E5E5">
+                                <DatePicker Name="d1" HorizontalAlignment="Left" Margin="26,51,0,0" VerticalAlignment="Top"/>
+                                <DatePicker Name="d2" HorizontalAlignment="Left" Margin="158,51,0,0" VerticalAlignment="Top" />
+                                <Label Content="Дата начала" HorizontalAlignment="Left" Margin="57,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.376,0.259"/>
+                                <Label Content="Дата конца" HorizontalAlignment="Left" Margin="189,25,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.376,0.259"/>
+                                <DataGrid Name="diap"  d:ItemsSource="{d:SampleData ItemCount=5}" Margin="285,51,0,156"/>
+                                <Button Name="show_diap" Content="Показать" HorizontalAlignment="Left" Margin="76,103,0,0" VerticalAlignment="Top" Height="34" Width="78" Click="show_diap_Click"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Туры по методу передвижения">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid Name="trandD"  d:ItemsSource="{d:SampleData ItemCount=5}" Margin="285,51,0,156"/>
+                                <Button Name="show_trans" Content="Показать" HorizontalAlignment="Left" Margin="76,103,0,0" VerticalAlignment="Top" Height="34" Width="78" Click="show_trans_Click"/>
+                                <TextBox Name="transBox" HorizontalAlignment="Left" Margin="70,60,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Популярный тур">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid Name="popular_tourD"  d:ItemsSource="{d:SampleData ItemCount=5}" Margin="111,49,174,158"/>
+
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Непопулярный тур">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid Name="unpopular_tourD"  d:ItemsSource="{d:SampleData ItemCount=5}" Margin="111,49,174,158"/>
+
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Таблица туров">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid Name="table_tour"  d:ItemsSource="{d:SampleData ItemCount=5}" Margin="111,49,174,158"/>
+
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Таблица архивных туров">
+                            <Grid Background="#FFE5E5E5">
+                                <DataGrid Name="table_arc_tour"  d:ItemsSource="{d:SampleData ItemCount=5}" Margin="111,49,174,158"/>
+
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Клиенты агенства">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="57*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TabControl Grid.RowSpan="2">
+                        <TabItem Header="В туре ли клиент">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Список туров клиента">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Обновить клиента">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Удалить клиента">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Вставить клиента">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Таблица клиентов">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+
+
+            <TabItem Header="Туристы">
+                <Grid Background="#FFE5E5E5">
+                    <TabControl>
+                        <TabItem Header="Популярный турист">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Количество посещенных стран">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Где находится турист">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+
+
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Таблицы">
+                <Grid Background="#FFE5E5E5">
+                    <TabControl>
+                        <TabItem Header="Города">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Страны">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Гостиницы">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Достопримечательности">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                        <TabItem Header="Работники турагенства">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+
+
+
+                    </TabControl>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>

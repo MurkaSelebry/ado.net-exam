@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f91d32a37d7541ca86bca689f7082397" Name="Diagram1">
+        <EntityTypeShape EntityType="Tourist_Model.Клиенты_агенства" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tourist_Model.Работники_турагентства" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tourist_Model.Сотрудники_привязаныне_к_странам__турам" Width="1.5" PointX="5.25" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tourist_Model.Архивные_туры" Width="1.5" PointX="3" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tourist_Model.Города" Width="1.5" PointX="6" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tourist_Model.Гостиницы" Width="1.5" PointX="3" PointY="19.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tourist_Model.Гостиницы_для_тура" Width="1.5" PointX="5.25" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tourist_Model.Достопримечательности" Width="1.5" PointX="8.25" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tourist_Model.Посещеннные_города" Width="1.5" PointX="8.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tourist_Model.Посещеннные_страны" Width="1.5" PointX="8.25" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tourist_Model.Страны" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tourist_Model.Туры" Width="1.5" PointX="3" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tourist_Model.actual_tours" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tourist_Model.v_employees" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="Tourist_Model.FK__Архивные___Emplo__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="Tourist_Model.FK__Сотрудник__Emplo__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="Tourist_Model.FK__Туры__EmployerId__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="Tourist_Model.FK__Сотрудник__Count__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="Tourist_Model.FK__Сотрудник__TourI__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="Tourist_Model.FK__Достоприм__CityI__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="Tourist_Model.FK__Посещеннн__CityI__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="Tourist_Model.FK__Гостиницы__Hotel__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="Tourist_Model.FK__Гостиницы__TourI__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="Tourist_Model.FK__Достоприм__TourI__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="Tourist_Model.FK__Посещеннн__TourI__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="Tourist_Model.FK__Посещеннн__Count__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="Tourist_Model.FK__Посещеннн__TourI__440B1D61" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,1298 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Tourist_Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Клиенты агенства">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="FutureTours" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PastTours" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Работники турагентства">
+          <Key>
+            <PropertyRef Name="EmployerId" />
+          </Key>
+          <Property Name="EmployerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Position" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DateOfEmployment" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Сотрудники привязаныне к странам, турам">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployerId" Type="int" Nullable="false" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="TourId" Type="int" />
+        </EntityType>
+        <EntityType Name="Архивные туры">
+          <Key>
+            <PropertyRef Name="TourId" />
+          </Key>
+          <Property Name="TourId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="DateOfStart" Type="date" Nullable="false" />
+          <Property Name="DateOfEnd" Type="date" Nullable="false" />
+          <Property Name="TransportMethods" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PaidCustomers" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MaxCustomersNumber" Type="int" Nullable="false" />
+          <Property Name="PotentialCustomers" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EmployerId" Type="int" Nullable="false" />
+          <Property Name="FIOEmployer" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Города">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Гостиницы">
+          <Key>
+            <PropertyRef Name="HotelId" />
+          </Key>
+          <Property Name="HotelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelInfo" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Гостиницы для тура">
+          <Key>
+            <PropertyRef Name="HotelBookId" />
+          </Key>
+          <Property Name="HotelBookId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelId" Type="int" Nullable="false" />
+          <Property Name="TourId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Достопримечательности">
+          <Key>
+            <PropertyRef Name="InterestId" />
+          </Key>
+          <Property Name="InterestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TourId" Type="int" Nullable="false" />
+          <Property Name="CityId" Type="int" Nullable="false" />
+          <Property Name="InterestInfo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IncludeInTour" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Посещеннные города">
+          <Key>
+            <PropertyRef Name="VistedCityId" />
+          </Key>
+          <Property Name="VistedCityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityId" Type="int" Nullable="false" />
+          <Property Name="TourId" Type="int" Nullable="false" />
+          <Property Name="DateOfVisit" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Посещеннные страны">
+          <Key>
+            <PropertyRef Name="VistedCountryId" />
+          </Key>
+          <Property Name="VistedCountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+          <Property Name="TourId" Type="int" Nullable="false" />
+          <Property Name="DateOfVisit" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Страны">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Туры">
+          <Key>
+            <PropertyRef Name="TourId" />
+          </Key>
+          <Property Name="TourId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="DateOfStart" Type="date" Nullable="false" />
+          <Property Name="DateOfEnd" Type="date" Nullable="false" />
+          <Property Name="TransportMethods" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PaidCustomers" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MaxCustomersNumber" Type="int" Nullable="false" />
+          <Property Name="PotentialCustomers" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EmployerId" Type="int" Nullable="false" />
+          <Property Name="FIOEmployer" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Туристическое агентство «Вокруг света за 80 дней».dbo.actual_tours" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="actual_tours">
+          <Key>
+            <PropertyRef Name="TourId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="DateOfStart" />
+            <PropertyRef Name="DateOfEnd" />
+            <PropertyRef Name="TransportMethods" />
+            <PropertyRef Name="PaidCustomers" />
+            <PropertyRef Name="MaxCustomersNumber" />
+            <PropertyRef Name="PotentialCustomers" />
+            <PropertyRef Name="EmployerId" />
+            <PropertyRef Name="FIOEmployer" />
+          </Key>
+          <Property Name="TourId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="DateOfStart" Type="date" Nullable="false" />
+          <Property Name="DateOfEnd" Type="date" Nullable="false" />
+          <Property Name="TransportMethods" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PaidCustomers" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MaxCustomersNumber" Type="int" Nullable="false" />
+          <Property Name="PotentialCustomers" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EmployerId" Type="int" Nullable="false" />
+          <Property Name="FIOEmployer" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Туристическое агентство «Вокруг света за 80 дней».dbo.v_employees" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="v_employees">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name Of Country" />
+            <PropertyRef Name="FIO" />
+            <PropertyRef Name="Position" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="EmployerId" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Date Of Employment" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name Of Country" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Position" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="12" Nullable="false" />
+          <Property Name="EmployerId" Type="int" Nullable="false" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="TourId" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Date Of Employment" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Архивные __Emplo__3C69FB99">
+          <End Role="Работники турагентства" Type="Self.Работники турагентства" Multiplicity="1" />
+          <End Role="Архивные туры" Type="Self.Архивные туры" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Работники турагентства">
+              <PropertyRef Name="EmployerId" />
+            </Principal>
+            <Dependent Role="Архивные туры">
+              <PropertyRef Name="EmployerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Гостиницы__Hotel__3D5E1FD2">
+          <End Role="Гостиницы" Type="Self.Гостиницы" Multiplicity="1" />
+          <End Role="Гостиницы для тура" Type="Self.Гостиницы для тура" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Гостиницы">
+              <PropertyRef Name="HotelId" />
+            </Principal>
+            <Dependent Role="Гостиницы для тура">
+              <PropertyRef Name="HotelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Гостиницы__TourI__3E52440B">
+          <End Role="Туры" Type="Self.Туры" Multiplicity="1" />
+          <End Role="Гостиницы для тура" Type="Self.Гостиницы для тура" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Туры">
+              <PropertyRef Name="TourId" />
+            </Principal>
+            <Dependent Role="Гостиницы для тура">
+              <PropertyRef Name="TourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Достоприм__CityI__3F466844">
+          <End Role="Города" Type="Self.Города" Multiplicity="1" />
+          <End Role="Достопримечательности" Type="Self.Достопримечательности" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Города">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="Достопримечательности">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Достоприм__TourI__403A8C7D">
+          <End Role="Туры" Type="Self.Туры" Multiplicity="1" />
+          <End Role="Достопримечательности" Type="Self.Достопримечательности" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Туры">
+              <PropertyRef Name="TourId" />
+            </Principal>
+            <Dependent Role="Достопримечательности">
+              <PropertyRef Name="TourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Посещеннн__CityI__412EB0B6">
+          <End Role="Города" Type="Self.Города" Multiplicity="1" />
+          <End Role="Посещеннные города" Type="Self.Посещеннные города" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Города">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="Посещеннные города">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Посещеннн__Count__4316F928">
+          <End Role="Страны" Type="Self.Страны" Multiplicity="1" />
+          <End Role="Посещеннные страны" Type="Self.Посещеннные страны" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Страны">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Посещеннные страны">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Посещеннн__TourI__4222D4EF">
+          <End Role="Туры" Type="Self.Туры" Multiplicity="1" />
+          <End Role="Посещеннные города" Type="Self.Посещеннные города" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Туры">
+              <PropertyRef Name="TourId" />
+            </Principal>
+            <Dependent Role="Посещеннные города">
+              <PropertyRef Name="TourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Посещеннн__TourI__440B1D61">
+          <End Role="Туры" Type="Self.Туры" Multiplicity="1" />
+          <End Role="Посещеннные страны" Type="Self.Посещеннные страны" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Туры">
+              <PropertyRef Name="TourId" />
+            </Principal>
+            <Dependent Role="Посещеннные страны">
+              <PropertyRef Name="TourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Сотрудник__Count__398D8EEE">
+          <End Role="Страны" Type="Self.Страны" Multiplicity="0..1" />
+          <End Role="Сотрудники привязаныне к странам, турам" Type="Self.Сотрудники привязаныне к странам, турам" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Страны">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Сотрудники привязаныне к странам, турам">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Сотрудник__Emplo__3A81B327">
+          <End Role="Работники турагентства" Type="Self.Работники турагентства" Multiplicity="1" />
+          <End Role="Сотрудники привязаныне к странам, турам" Type="Self.Сотрудники привязаныне к странам, турам" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Работники турагентства">
+              <PropertyRef Name="EmployerId" />
+            </Principal>
+            <Dependent Role="Сотрудники привязаныне к странам, турам">
+              <PropertyRef Name="EmployerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Сотрудник__TourI__3B75D760">
+          <End Role="Туры" Type="Self.Туры" Multiplicity="0..1" />
+          <End Role="Сотрудники привязаныне к странам, турам" Type="Self.Сотрудники привязаныне к странам, турам" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Туры">
+              <PropertyRef Name="TourId" />
+            </Principal>
+            <Dependent Role="Сотрудники привязаныне к странам, турам">
+              <PropertyRef Name="TourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Туры__EmployerId__44FF419A">
+          <End Role="Работники турагентства" Type="Self.Работники турагентства" Multiplicity="1" />
+          <End Role="Туры" Type="Self.Туры" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Работники турагентства">
+              <PropertyRef Name="EmployerId" />
+            </Principal>
+            <Dependent Role="Туры">
+              <PropertyRef Name="EmployerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="diap_start_date" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="date1" Type="date" Mode="In" />
+          <Parameter Name="date2" Type="date" Mode="In" />
+        </Function>
+        <Function Name="in_tour" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FIO" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="popular_arc_tour" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="popular_country" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="country" Type="nvarchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="popular_tour" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="TourId" Type="int" Nullable="false" />
+                <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+                <Property Name="Price" Type="money" Nullable="false" />
+                <Property Name="DateOfStart" Type="date" Nullable="false" />
+                <Property Name="DateOfEnd" Type="date" Nullable="false" />
+                <Property Name="TransportMethods" Type="nvarchar(max)" Nullable="false" />
+                <Property Name="PaidCustomers" Type="nvarchar(max)" Nullable="false" />
+                <Property Name="MaxCustomersNumber" Type="int" Nullable="false" />
+                <Property Name="PotentialCustomers" Type="nvarchar(max)" Nullable="false" />
+                <Property Name="EmployerId" Type="int" Nullable="false" />
+                <Property Name="FIOEmployer" Type="nvarchar" MaxLength="100" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="popular_tourist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="show_list" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FIO" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="transport_method" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="transpM" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="unpopular_tour" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="TourId" Type="int" Nullable="false" />
+                <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+                <Property Name="Price" Type="money" Nullable="false" />
+                <Property Name="DateOfStart" Type="date" Nullable="false" />
+                <Property Name="DateOfEnd" Type="date" Nullable="false" />
+                <Property Name="TransportMethods" Type="nvarchar(max)" Nullable="false" />
+                <Property Name="PaidCustomers" Type="nvarchar(max)" Nullable="false" />
+                <Property Name="MaxCustomersNumber" Type="int" Nullable="false" />
+                <Property Name="PotentialCustomers" Type="nvarchar(max)" Nullable="false" />
+                <Property Name="EmployerId" Type="int" Nullable="false" />
+                <Property Name="FIOEmployer" Type="nvarchar" MaxLength="100" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="visit_country" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="country" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="where_is_tourist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FIO" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="Хранилище Tourist_ModelContainer">
+          <EntitySet Name="Клиенты агенства" EntityType="Self.Клиенты агенства" Schema="customers" store:Type="Tables" />
+          <EntitySet Name="Работники турагентства" EntityType="Self.Работники турагентства" Schema="employees" store:Type="Tables" />
+          <EntitySet Name="Сотрудники привязаныне к странам, турам" EntityType="Self.Сотрудники привязаныне к странам, турам" Schema="employees" store:Type="Tables" />
+          <EntitySet Name="Архивные туры" EntityType="Self.Архивные туры" Schema="tours" store:Type="Tables" />
+          <EntitySet Name="Города" EntityType="Self.Города" Schema="tours" store:Type="Tables" />
+          <EntitySet Name="Гостиницы" EntityType="Self.Гостиницы" Schema="tours" store:Type="Tables" />
+          <EntitySet Name="Гостиницы для тура" EntityType="Self.Гостиницы для тура" Schema="tours" store:Type="Tables" />
+          <EntitySet Name="Достопримечательности" EntityType="Self.Достопримечательности" Schema="tours" store:Type="Tables" />
+          <EntitySet Name="Посещеннные города" EntityType="Self.Посещеннные города" Schema="tours" store:Type="Tables" />
+          <EntitySet Name="Посещеннные страны" EntityType="Self.Посещеннные страны" Schema="tours" store:Type="Tables" />
+          <EntitySet Name="Страны" EntityType="Self.Страны" Schema="tours" store:Type="Tables" />
+          <EntitySet Name="Туры" EntityType="Self.Туры" Schema="tours" store:Type="Tables" />
+          <EntitySet Name="actual_tours" EntityType="Self.actual_tours" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [actual_tours].[TourId] AS [TourId], 
+    [actual_tours].[Name] AS [Name], 
+    [actual_tours].[Price] AS [Price], 
+    [actual_tours].[DateOfStart] AS [DateOfStart], 
+    [actual_tours].[DateOfEnd] AS [DateOfEnd], 
+    [actual_tours].[TransportMethods] AS [TransportMethods], 
+    [actual_tours].[PaidCustomers] AS [PaidCustomers], 
+    [actual_tours].[MaxCustomersNumber] AS [MaxCustomersNumber], 
+    [actual_tours].[PotentialCustomers] AS [PotentialCustomers], 
+    [actual_tours].[EmployerId] AS [EmployerId], 
+    [actual_tours].[FIOEmployer] AS [FIOEmployer]
+    FROM [dbo].[actual_tours] AS [actual_tours]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="v_employees" EntityType="Self.v_employees" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [v_employees].[Id] AS [Id], 
+    [v_employees].[Name Of Country] AS [Name Of Country], 
+    [v_employees].[FIO] AS [FIO], 
+    [v_employees].[Position] AS [Position], 
+    [v_employees].[Phone] AS [Phone], 
+    [v_employees].[EmployerId] AS [EmployerId], 
+    [v_employees].[CountryId] AS [CountryId], 
+    [v_employees].[TourId] AS [TourId], 
+    [v_employees].[Email] AS [Email], 
+    [v_employees].[Date Of Employment] AS [Date Of Employment]
+    FROM [dbo].[v_employees] AS [v_employees]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Архивные __Emplo__3C69FB99" Association="Self.FK__Архивные __Emplo__3C69FB99">
+            <End Role="Работники турагентства" EntitySet="Работники турагентства" />
+            <End Role="Архивные туры" EntitySet="Архивные туры" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Гостиницы__Hotel__3D5E1FD2" Association="Self.FK__Гостиницы__Hotel__3D5E1FD2">
+            <End Role="Гостиницы" EntitySet="Гостиницы" />
+            <End Role="Гостиницы для тура" EntitySet="Гостиницы для тура" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Гостиницы__TourI__3E52440B" Association="Self.FK__Гостиницы__TourI__3E52440B">
+            <End Role="Туры" EntitySet="Туры" />
+            <End Role="Гостиницы для тура" EntitySet="Гостиницы для тура" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Достоприм__CityI__3F466844" Association="Self.FK__Достоприм__CityI__3F466844">
+            <End Role="Города" EntitySet="Города" />
+            <End Role="Достопримечательности" EntitySet="Достопримечательности" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Достоприм__TourI__403A8C7D" Association="Self.FK__Достоприм__TourI__403A8C7D">
+            <End Role="Туры" EntitySet="Туры" />
+            <End Role="Достопримечательности" EntitySet="Достопримечательности" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Посещеннн__CityI__412EB0B6" Association="Self.FK__Посещеннн__CityI__412EB0B6">
+            <End Role="Города" EntitySet="Города" />
+            <End Role="Посещеннные города" EntitySet="Посещеннные города" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Посещеннн__Count__4316F928" Association="Self.FK__Посещеннн__Count__4316F928">
+            <End Role="Страны" EntitySet="Страны" />
+            <End Role="Посещеннные страны" EntitySet="Посещеннные страны" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Посещеннн__TourI__4222D4EF" Association="Self.FK__Посещеннн__TourI__4222D4EF">
+            <End Role="Туры" EntitySet="Туры" />
+            <End Role="Посещеннные города" EntitySet="Посещеннные города" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Посещеннн__TourI__440B1D61" Association="Self.FK__Посещеннн__TourI__440B1D61">
+            <End Role="Туры" EntitySet="Туры" />
+            <End Role="Посещеннные страны" EntitySet="Посещеннные страны" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Сотрудник__Count__398D8EEE" Association="Self.FK__Сотрудник__Count__398D8EEE">
+            <End Role="Страны" EntitySet="Страны" />
+            <End Role="Сотрудники привязаныне к странам, турам" EntitySet="Сотрудники привязаныне к странам, турам" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Сотрудник__Emplo__3A81B327" Association="Self.FK__Сотрудник__Emplo__3A81B327">
+            <End Role="Работники турагентства" EntitySet="Работники турагентства" />
+            <End Role="Сотрудники привязаныне к странам, турам" EntitySet="Сотрудники привязаныне к странам, турам" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Сотрудник__TourI__3B75D760" Association="Self.FK__Сотрудник__TourI__3B75D760">
+            <End Role="Туры" EntitySet="Туры" />
+            <End Role="Сотрудники привязаныне к странам, турам" EntitySet="Сотрудники привязаныне к странам, турам" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Туры__EmployerId__44FF419A" Association="Self.FK__Туры__EmployerId__44FF419A">
+            <End Role="Работники турагентства" EntitySet="Работники турагентства" />
+            <End Role="Туры" EntitySet="Туры" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Tourist_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="popular_tour_Result">
+          <Property Name="TourId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DateOfStart" Type="DateTime" Nullable="false" />
+          <Property Name="DateOfEnd" Type="DateTime" Nullable="false" />
+          <Property Name="TransportMethods" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PaidCustomers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaxCustomersNumber" Type="Int32" Nullable="false" />
+          <Property Name="PotentialCustomers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmployerId" Type="Int32" Nullable="false" />
+          <Property Name="FIOEmployer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="unpopular_tour_Result">
+          <Property Name="TourId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DateOfStart" Type="DateTime" Nullable="false" />
+          <Property Name="DateOfEnd" Type="DateTime" Nullable="false" />
+          <Property Name="TransportMethods" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PaidCustomers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaxCustomersNumber" Type="Int32" Nullable="false" />
+          <Property Name="PotentialCustomers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmployerId" Type="Int32" Nullable="false" />
+          <Property Name="FIOEmployer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Клиенты_агенства">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FIO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FutureTours" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PastTours" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Работники_турагентства">
+          <Key>
+            <PropertyRef Name="EmployerId" />
+          </Key>
+          <Property Name="EmployerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FIO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateOfEmployment" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Архивные_туры" Relationship="Self.FK__Архивные___Emplo__3C69FB99" FromRole="Работники_турагентства" ToRole="Архивные_туры" />
+          <NavigationProperty Name="Сотрудники_привязаныне_к_странам__турам" Relationship="Self.FK__Сотрудник__Emplo__3A81B327" FromRole="Работники_турагентства" ToRole="Сотрудники_привязаныне_к_странам__турам" />
+          <NavigationProperty Name="Туры" Relationship="Self.FK__Туры__EmployerId__44FF419A" FromRole="Работники_турагентства" ToRole="Туры" />
+        </EntityType>
+        <EntityType Name="Сотрудники_привязаныне_к_странам__турам">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployerId" Type="Int32" Nullable="false" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="TourId" Type="Int32" />
+          <NavigationProperty Name="Работники_турагентства" Relationship="Self.FK__Сотрудник__Emplo__3A81B327" FromRole="Сотрудники_привязаныне_к_странам__турам" ToRole="Работники_турагентства" />
+          <NavigationProperty Name="Страны" Relationship="Self.FK__Сотрудник__Count__398D8EEE" FromRole="Сотрудники_привязаныне_к_странам__турам" ToRole="Страны" />
+          <NavigationProperty Name="Туры" Relationship="Self.FK__Сотрудник__TourI__3B75D760" FromRole="Сотрудники_привязаныне_к_странам__турам" ToRole="Туры" />
+        </EntityType>
+        <EntityType Name="Архивные_туры">
+          <Key>
+            <PropertyRef Name="TourId" />
+          </Key>
+          <Property Name="TourId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DateOfStart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateOfEnd" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TransportMethods" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PaidCustomers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaxCustomersNumber" Type="Int32" Nullable="false" />
+          <Property Name="PotentialCustomers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmployerId" Type="Int32" Nullable="false" />
+          <Property Name="FIOEmployer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Работники_турагентства" Relationship="Self.FK__Архивные___Emplo__3C69FB99" FromRole="Архивные_туры" ToRole="Работники_турагентства" />
+        </EntityType>
+        <EntityType Name="Города">
+          <Key>
+            <PropertyRef Name="CityId" />
+          </Key>
+          <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Достопримечательности" Relationship="Self.FK__Достоприм__CityI__3F466844" FromRole="Города" ToRole="Достопримечательности" />
+          <NavigationProperty Name="Посещеннные_города" Relationship="Self.FK__Посещеннн__CityI__412EB0B6" FromRole="Города" ToRole="Посещеннные_города" />
+        </EntityType>
+        <EntityType Name="Гостиницы">
+          <Key>
+            <PropertyRef Name="HotelId" />
+          </Key>
+          <Property Name="HotelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Гостиницы_для_тура" Relationship="Self.FK__Гостиницы__Hotel__3D5E1FD2" FromRole="Гостиницы" ToRole="Гостиницы_для_тура" />
+        </EntityType>
+        <EntityType Name="Гостиницы_для_тура">
+          <Key>
+            <PropertyRef Name="HotelBookId" />
+          </Key>
+          <Property Name="HotelBookId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelId" Type="Int32" Nullable="false" />
+          <Property Name="TourId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Гостиницы" Relationship="Self.FK__Гостиницы__Hotel__3D5E1FD2" FromRole="Гостиницы_для_тура" ToRole="Гостиницы" />
+          <NavigationProperty Name="Туры" Relationship="Self.FK__Гостиницы__TourI__3E52440B" FromRole="Гостиницы_для_тура" ToRole="Туры" />
+        </EntityType>
+        <EntityType Name="Достопримечательности">
+          <Key>
+            <PropertyRef Name="InterestId" />
+          </Key>
+          <Property Name="InterestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TourId" Type="Int32" Nullable="false" />
+          <Property Name="CityId" Type="Int32" Nullable="false" />
+          <Property Name="InterestInfo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IncludeInTour" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Города" Relationship="Self.FK__Достоприм__CityI__3F466844" FromRole="Достопримечательности" ToRole="Города" />
+          <NavigationProperty Name="Туры" Relationship="Self.FK__Достоприм__TourI__403A8C7D" FromRole="Достопримечательности" ToRole="Туры" />
+        </EntityType>
+        <EntityType Name="Посещеннные_города">
+          <Key>
+            <PropertyRef Name="VistedCityId" />
+          </Key>
+          <Property Name="VistedCityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityId" Type="Int32" Nullable="false" />
+          <Property Name="TourId" Type="Int32" Nullable="false" />
+          <Property Name="DateOfVisit" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Города" Relationship="Self.FK__Посещеннн__CityI__412EB0B6" FromRole="Посещеннные_города" ToRole="Города" />
+          <NavigationProperty Name="Туры" Relationship="Self.FK__Посещеннн__TourI__4222D4EF" FromRole="Посещеннные_города" ToRole="Туры" />
+        </EntityType>
+        <EntityType Name="Посещеннные_страны">
+          <Key>
+            <PropertyRef Name="VistedCountryId" />
+          </Key>
+          <Property Name="VistedCountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <Property Name="TourId" Type="Int32" Nullable="false" />
+          <Property Name="DateOfVisit" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Страны" Relationship="Self.FK__Посещеннн__Count__4316F928" FromRole="Посещеннные_страны" ToRole="Страны" />
+          <NavigationProperty Name="Туры" Relationship="Self.FK__Посещеннн__TourI__440B1D61" FromRole="Посещеннные_страны" ToRole="Туры" />
+        </EntityType>
+        <EntityType Name="Страны">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Сотрудники_привязаныне_к_странам__турам" Relationship="Self.FK__Сотрудник__Count__398D8EEE" FromRole="Страны" ToRole="Сотрудники_привязаныне_к_странам__турам" />
+          <NavigationProperty Name="Посещеннные_страны" Relationship="Self.FK__Посещеннн__Count__4316F928" FromRole="Страны" ToRole="Посещеннные_страны" />
+        </EntityType>
+        <EntityType Name="Туры">
+          <Key>
+            <PropertyRef Name="TourId" />
+          </Key>
+          <Property Name="TourId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DateOfStart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateOfEnd" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TransportMethods" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PaidCustomers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaxCustomersNumber" Type="Int32" Nullable="false" />
+          <Property Name="PotentialCustomers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmployerId" Type="Int32" Nullable="false" />
+          <Property Name="FIOEmployer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Работники_турагентства" Relationship="Self.FK__Туры__EmployerId__44FF419A" FromRole="Туры" ToRole="Работники_турагентства" />
+          <NavigationProperty Name="Сотрудники_привязаныне_к_странам__турам" Relationship="Self.FK__Сотрудник__TourI__3B75D760" FromRole="Туры" ToRole="Сотрудники_привязаныне_к_странам__турам" />
+          <NavigationProperty Name="Гостиницы_для_тура" Relationship="Self.FK__Гостиницы__TourI__3E52440B" FromRole="Туры" ToRole="Гостиницы_для_тура" />
+          <NavigationProperty Name="Достопримечательности" Relationship="Self.FK__Достоприм__TourI__403A8C7D" FromRole="Туры" ToRole="Достопримечательности" />
+          <NavigationProperty Name="Посещеннные_города" Relationship="Self.FK__Посещеннн__TourI__4222D4EF" FromRole="Туры" ToRole="Посещеннные_города" />
+          <NavigationProperty Name="Посещеннные_страны" Relationship="Self.FK__Посещеннн__TourI__440B1D61" FromRole="Туры" ToRole="Посещеннные_страны" />
+        </EntityType>
+        <EntityType Name="actual_tours">
+          <Key>
+            <PropertyRef Name="TourId" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Price" />
+            <PropertyRef Name="DateOfStart" />
+            <PropertyRef Name="DateOfEnd" />
+            <PropertyRef Name="TransportMethods" />
+            <PropertyRef Name="PaidCustomers" />
+            <PropertyRef Name="MaxCustomersNumber" />
+            <PropertyRef Name="PotentialCustomers" />
+            <PropertyRef Name="EmployerId" />
+            <PropertyRef Name="FIOEmployer" />
+          </Key>
+          <Property Name="TourId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DateOfStart" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateOfEnd" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TransportMethods" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PaidCustomers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MaxCustomersNumber" Type="Int32" Nullable="false" />
+          <Property Name="PotentialCustomers" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmployerId" Type="Int32" Nullable="false" />
+          <Property Name="FIOEmployer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="v_employees">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name_Of_Country" />
+            <PropertyRef Name="FIO" />
+            <PropertyRef Name="Position" />
+            <PropertyRef Name="Phone" />
+            <PropertyRef Name="EmployerId" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Date_Of_Employment" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name_Of_Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FIO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="12" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EmployerId" Type="Int32" Nullable="false" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="TourId" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date_Of_Employment" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <Association Name="FK__Архивные___Emplo__3C69FB99">
+          <End Role="Работники_турагентства" Type="Self.Работники_турагентства" Multiplicity="1" />
+          <End Role="Архивные_туры" Type="Self.Архивные_туры" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Работники_турагентства">
+              <PropertyRef Name="EmployerId" />
+            </Principal>
+            <Dependent Role="Архивные_туры">
+              <PropertyRef Name="EmployerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Сотрудник__Emplo__3A81B327">
+          <End Role="Работники_турагентства" Type="Self.Работники_турагентства" Multiplicity="1" />
+          <End Role="Сотрудники_привязаныне_к_странам__турам" Type="Self.Сотрудники_привязаныне_к_странам__турам" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Работники_турагентства">
+              <PropertyRef Name="EmployerId" />
+            </Principal>
+            <Dependent Role="Сотрудники_привязаныне_к_странам__турам">
+              <PropertyRef Name="EmployerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Туры__EmployerId__44FF419A">
+          <End Role="Работники_турагентства" Type="Self.Работники_турагентства" Multiplicity="1" />
+          <End Role="Туры" Type="Self.Туры" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Работники_турагентства">
+              <PropertyRef Name="EmployerId" />
+            </Principal>
+            <Dependent Role="Туры">
+              <PropertyRef Name="EmployerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Сотрудник__Count__398D8EEE">
+          <End Role="Страны" Type="Self.Страны" Multiplicity="0..1" />
+          <End Role="Сотрудники_привязаныне_к_странам__турам" Type="Self.Сотрудники_привязаныне_к_странам__турам" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Страны">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Сотрудники_привязаныне_к_странам__турам">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Сотрудник__TourI__3B75D760">
+          <End Role="Туры" Type="Self.Туры" Multiplicity="0..1" />
+          <End Role="Сотрудники_привязаныне_к_странам__турам" Type="Self.Сотрудники_привязаныне_к_странам__турам" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Туры">
+              <PropertyRef Name="TourId" />
+            </Principal>
+            <Dependent Role="Сотрудники_привязаныне_к_странам__турам">
+              <PropertyRef Name="TourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Достоприм__CityI__3F466844">
+          <End Role="Города" Type="Self.Города" Multiplicity="1" />
+          <End Role="Достопримечательности" Type="Self.Достопримечательности" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Города">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="Достопримечательности">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Посещеннн__CityI__412EB0B6">
+          <End Role="Города" Type="Self.Города" Multiplicity="1" />
+          <End Role="Посещеннные_города" Type="Self.Посещеннные_города" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Города">
+              <PropertyRef Name="CityId" />
+            </Principal>
+            <Dependent Role="Посещеннные_города">
+              <PropertyRef Name="CityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Гостиницы__Hotel__3D5E1FD2">
+          <End Role="Гостиницы" Type="Self.Гостиницы" Multiplicity="1" />
+          <End Role="Гостиницы_для_тура" Type="Self.Гостиницы_для_тура" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Гостиницы">
+              <PropertyRef Name="HotelId" />
+            </Principal>
+            <Dependent Role="Гостиницы_для_тура">
+              <PropertyRef Name="HotelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Гостиницы__TourI__3E52440B">
+          <End Role="Туры" Type="Self.Туры" Multiplicity="1" />
+          <End Role="Гостиницы_для_тура" Type="Self.Гостиницы_для_тура" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Туры">
+              <PropertyRef Name="TourId" />
+            </Principal>
+            <Dependent Role="Гостиницы_для_тура">
+              <PropertyRef Name="TourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Достоприм__TourI__403A8C7D">
+          <End Role="Туры" Type="Self.Туры" Multiplicity="1" />
+          <End Role="Достопримечательности" Type="Self.Достопримечательности" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Туры">
+              <PropertyRef Name="TourId" />
+            </Principal>
+            <Dependent Role="Достопримечательности">
+              <PropertyRef Name="TourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Посещеннн__TourI__4222D4EF">
+          <End Role="Туры" Type="Self.Туры" Multiplicity="1" />
+          <End Role="Посещеннные_города" Type="Self.Посещеннные_города" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Туры">
+              <PropertyRef Name="TourId" />
+            </Principal>
+            <Dependent Role="Посещеннные_города">
+              <PropertyRef Name="TourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Посещеннн__Count__4316F928">
+          <End Role="Страны" Type="Self.Страны" Multiplicity="1" />
+          <End Role="Посещеннные_страны" Type="Self.Посещеннные_страны" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Страны">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="Посещеннные_страны">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Посещеннн__TourI__440B1D61">
+          <End Role="Туры" Type="Self.Туры" Multiplicity="1" />
+          <End Role="Посещеннные_страны" Type="Self.Посещеннные_страны" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Туры">
+              <PropertyRef Name="TourId" />
+            </Principal>
+            <Dependent Role="Посещеннные_страны">
+              <PropertyRef Name="TourId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Tourist_Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Клиенты_агенства" EntityType="Self.Клиенты_агенства" />
+          <EntitySet Name="Работники_турагентства" EntityType="Self.Работники_турагентства" />
+          <EntitySet Name="Сотрудники_привязаныне_к_странам__турам" EntityType="Self.Сотрудники_привязаныне_к_странам__турам" />
+          <EntitySet Name="Архивные_туры" EntityType="Self.Архивные_туры" />
+          <EntitySet Name="Города" EntityType="Self.Города" />
+          <EntitySet Name="Гостиницы" EntityType="Self.Гостиницы" />
+          <EntitySet Name="Гостиницы_для_тура" EntityType="Self.Гостиницы_для_тура" />
+          <EntitySet Name="Достопримечательности" EntityType="Self.Достопримечательности" />
+          <EntitySet Name="Посещеннные_города" EntityType="Self.Посещеннные_города" />
+          <EntitySet Name="Посещеннные_страны" EntityType="Self.Посещеннные_страны" />
+          <EntitySet Name="Страны" EntityType="Self.Страны" />
+          <EntitySet Name="Туры" EntityType="Self.Туры" />
+          <EntitySet Name="actual_tours" EntityType="Self.actual_tours" />
+          <EntitySet Name="v_employees" EntityType="Self.v_employees" />
+          <AssociationSet Name="FK__Архивные___Emplo__3C69FB99" Association="Self.FK__Архивные___Emplo__3C69FB99">
+            <End Role="Работники_турагентства" EntitySet="Работники_турагентства" />
+            <End Role="Архивные_туры" EntitySet="Архивные_туры" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Сотрудник__Emplo__3A81B327" Association="Self.FK__Сотрудник__Emplo__3A81B327">
+            <End Role="Работники_турагентства" EntitySet="Работники_турагентства" />
+            <End Role="Сотрудники_привязаныне_к_странам__турам" EntitySet="Сотрудники_привязаныне_к_странам__турам" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Туры__EmployerId__44FF419A" Association="Self.FK__Туры__EmployerId__44FF419A">
+            <End Role="Работники_турагентства" EntitySet="Работники_турагентства" />
+            <End Role="Туры" EntitySet="Туры" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Сотрудник__Count__398D8EEE" Association="Self.FK__Сотрудник__Count__398D8EEE">
+            <End Role="Страны" EntitySet="Страны" />
+            <End Role="Сотрудники_привязаныне_к_странам__турам" EntitySet="Сотрудники_привязаныне_к_странам__турам" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Сотрудник__TourI__3B75D760" Association="Self.FK__Сотрудник__TourI__3B75D760">
+            <End Role="Туры" EntitySet="Туры" />
+            <End Role="Сотрудники_привязаныне_к_странам__турам" EntitySet="Сотрудники_привязаныне_к_странам__турам" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Достоприм__CityI__3F466844" Association="Self.FK__Достоприм__CityI__3F466844">
+            <End Role="Города" EntitySet="Города" />
+            <End Role="Достопримечательности" EntitySet="Достопримечательности" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Посещеннн__CityI__412EB0B6" Association="Self.FK__Посещеннн__CityI__412EB0B6">
+            <End Role="Города" EntitySet="Города" />
+            <End Role="Посещеннные_города" EntitySet="Посещеннные_города" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Гостиницы__Hotel__3D5E1FD2" Association="Self.FK__Гостиницы__Hotel__3D5E1FD2">
+            <End Role="Гостиницы" EntitySet="Гостиницы" />
+            <End Role="Гостиницы_для_тура" EntitySet="Гостиницы_для_тура" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Гостиницы__TourI__3E52440B" Association="Self.FK__Гостиницы__TourI__3E52440B">
+            <End Role="Туры" EntitySet="Туры" />
+            <End Role="Гостиницы_для_тура" EntitySet="Гостиницы_для_тура" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Достоприм__TourI__403A8C7D" Association="Self.FK__Достоприм__TourI__403A8C7D">
+            <End Role="Туры" EntitySet="Туры" />
+            <End Role="Достопримечательности" EntitySet="Достопримечательности" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Посещеннн__TourI__4222D4EF" Association="Self.FK__Посещеннн__TourI__4222D4EF">
+            <End Role="Туры" EntitySet="Туры" />
+            <End Role="Посещеннные_города" EntitySet="Посещеннные_города" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Посещеннн__Count__4316F928" Association="Self.FK__Посещеннн__Count__4316F928">
+            <End Role="Страны" EntitySet="Страны" />
+            <End Role="Посещеннные_страны" EntitySet="Посещеннные_страны" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Посещеннн__TourI__440B1D61" Association="Self.FK__Посещеннн__TourI__440B1D61">
+            <End Role="Туры" EntitySet="Туры" />
+            <End Role="Посещеннные_страны" EntitySet="Посещеннные_страны" />
+          </AssociationSet>
+          <FunctionImport Name="popular_tour" IsComposable="true" ReturnType="Collection(Tourist_Model.popular_tour_Result)" />
+          <FunctionImport Name="unpopular_tour" IsComposable="true" ReturnType="Collection(Tourist_Model.unpopular_tour_Result)" />
+          <FunctionImport Name="diap_start_date" ReturnType="Collection(Tourist_Model.diap_start_date_Result)">
+            <Parameter Name="date1" Mode="In" Type="DateTime" />
+            <Parameter Name="date2" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="in_tour" ReturnType="Collection(Boolean)">
+            <Parameter Name="FIO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="popular_arc_tour" ReturnType="Collection(Tourist_Model.popular_arc_tour_Result)" />
+          <FunctionImport Name="popular_country">
+            <Parameter Name="country" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="popular_tourist" ReturnType="Collection(String)" />
+          <FunctionImport Name="show_list" ReturnType="Collection(String)">
+            <Parameter Name="FIO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="transport_method" ReturnType="Collection(Tourist_Model.transport_method_Result)">
+            <Parameter Name="transpM" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="visit_country">
+            <Parameter Name="country" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="where_is_tourist" ReturnType="Collection(String)">
+            <Parameter Name="FIO" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="diap_start_date_Result">
+          <Property Type="Int32" Name="TourId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="19" />
+          <Property Type="DateTime" Name="DateOfStart" Nullable="false" />
+          <Property Type="DateTime" Name="DateOfEnd" Nullable="false" />
+          <Property Type="String" Name="TransportMethods" Nullable="false" />
+          <Property Type="String" Name="PaidCustomers" Nullable="false" />
+          <Property Type="Int32" Name="MaxCustomersNumber" Nullable="false" />
+          <Property Type="String" Name="PotentialCustomers" Nullable="false" />
+          <Property Type="Int32" Name="EmployerId" Nullable="false" />
+          <Property Type="String" Name="FIOEmployer" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="popular_arc_tour_Result">
+          <Property Type="Int32" Name="TourId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="19" />
+          <Property Type="DateTime" Name="DateOfStart" Nullable="false" />
+          <Property Type="DateTime" Name="DateOfEnd" Nullable="false" />
+          <Property Type="String" Name="TransportMethods" Nullable="false" />
+          <Property Type="String" Name="PaidCustomers" Nullable="false" />
+          <Property Type="Int32" Name="MaxCustomersNumber" Nullable="false" />
+          <Property Type="String" Name="PotentialCustomers" Nullable="false" />
+          <Property Type="Int32" Name="EmployerId" Nullable="false" />
+          <Property Type="String" Name="FIOEmployer" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="transport_method_Result">
+          <Property Type="Int32" Name="TourId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="200" />
+          <Property Type="Decimal" Name="Price" Nullable="false" Precision="19" />
+          <Property Type="DateTime" Name="DateOfStart" Nullable="false" />
+          <Property Type="DateTime" Name="DateOfEnd" Nullable="false" />
+          <Property Type="String" Name="TransportMethods" Nullable="false" />
+          <Property Type="String" Name="PaidCustomers" Nullable="false" />
+          <Property Type="Int32" Name="MaxCustomersNumber" Nullable="false" />
+          <Property Type="String" Name="PotentialCustomers" Nullable="false" />
+          <Property Type="Int32" Name="EmployerId" Nullable="false" />
+          <Property Type="String" Name="FIOEmployer" Nullable="false" MaxLength="100" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Tourist_ModelContainer" CdmEntityContainer="Tourist_Entities">
+          <EntitySetMapping Name="Клиенты_агенства">
+            <EntityTypeMapping TypeName="Tourist_Model.Клиенты_агенства">
+              <MappingFragment StoreEntitySet="Клиенты агенства">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="FutureTours" ColumnName="FutureTours" />
+                <ScalarProperty Name="PastTours" ColumnName="PastTours" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Работники_турагентства">
+            <EntityTypeMapping TypeName="Tourist_Model.Работники_турагентства">
+              <MappingFragment StoreEntitySet="Работники турагентства">
+                <ScalarProperty Name="EmployerId" ColumnName="EmployerId" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DateOfEmployment" ColumnName="DateOfEmployment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Сотрудники_привязаныне_к_странам__турам">
+            <EntityTypeMapping TypeName="Tourist_Model.Сотрудники_привязаныне_к_странам__турам">
+              <MappingFragment StoreEntitySet="Сотрудники привязаныне к странам, турам">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EmployerId" ColumnName="EmployerId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="TourId" ColumnName="TourId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Архивные_туры">
+            <EntityTypeMapping TypeName="Tourist_Model.Архивные_туры">
+              <MappingFragment StoreEntitySet="Архивные туры">
+                <ScalarProperty Name="TourId" ColumnName="TourId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DateOfStart" ColumnName="DateOfStart" />
+                <ScalarProperty Name="DateOfEnd" ColumnName="DateOfEnd" />
+                <ScalarProperty Name="TransportMethods" ColumnName="TransportMethods" />
+                <ScalarProperty Name="PaidCustomers" ColumnName="PaidCustomers" />
+                <ScalarProperty Name="MaxCustomersNumber" ColumnName="MaxCustomersNumber" />
+                <ScalarProperty Name="PotentialCustomers" ColumnName="PotentialCustomers" />
+                <ScalarProperty Name="EmployerId" ColumnName="EmployerId" />
+                <ScalarProperty Name="FIOEmployer" ColumnName="FIOEmployer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Города">
+            <EntityTypeMapping TypeName="Tourist_Model.Города">
+              <MappingFragment StoreEntitySet="Города">
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Гостиницы">
+            <EntityTypeMapping TypeName="Tourist_Model.Гостиницы">
+              <MappingFragment StoreEntitySet="Гостиницы">
+                <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+                <ScalarProperty Name="HotelInfo" ColumnName="HotelInfo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Гостиницы_для_тура">
+            <EntityTypeMapping TypeName="Tourist_Model.Гостиницы_для_тура">
+              <MappingFragment StoreEntitySet="Гостиницы для тура">
+                <ScalarProperty Name="HotelBookId" ColumnName="HotelBookId" />
+                <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+                <ScalarProperty Name="TourId" ColumnName="TourId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Достопримечательности">
+            <EntityTypeMapping TypeName="Tourist_Model.Достопримечательности">
+              <MappingFragment StoreEntitySet="Достопримечательности">
+                <ScalarProperty Name="InterestId" ColumnName="InterestId" />
+                <ScalarProperty Name="TourId" ColumnName="TourId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="InterestInfo" ColumnName="InterestInfo" />
+                <ScalarProperty Name="IncludeInTour" ColumnName="IncludeInTour" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Посещеннные_города">
+            <EntityTypeMapping TypeName="Tourist_Model.Посещеннные_города">
+              <MappingFragment StoreEntitySet="Посещеннные города">
+                <ScalarProperty Name="VistedCityId" ColumnName="VistedCityId" />
+                <ScalarProperty Name="CityId" ColumnName="CityId" />
+                <ScalarProperty Name="TourId" ColumnName="TourId" />
+                <ScalarProperty Name="DateOfVisit" ColumnName="DateOfVisit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Посещеннные_страны">
+            <EntityTypeMapping TypeName="Tourist_Model.Посещеннные_страны">
+              <MappingFragment StoreEntitySet="Посещеннные страны">
+                <ScalarProperty Name="VistedCountryId" ColumnName="VistedCountryId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="TourId" ColumnName="TourId" />
+                <ScalarProperty Name="DateOfVisit" ColumnName="DateOfVisit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Страны">
+            <EntityTypeMapping TypeName="Tourist_Model.Страны">
+              <MappingFragment StoreEntitySet="Страны">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Туры">
+            <EntityTypeMapping TypeName="Tourist_Model.Туры">
+              <MappingFragment StoreEntitySet="Туры">
+                <ScalarProperty Name="TourId" ColumnName="TourId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DateOfStart" ColumnName="DateOfStart" />
+                <ScalarProperty Name="DateOfEnd" ColumnName="DateOfEnd" />
+                <ScalarProperty Name="TransportMethods" ColumnName="TransportMethods" />
+                <ScalarProperty Name="PaidCustomers" ColumnName="PaidCustomers" />
+                <ScalarProperty Name="MaxCustomersNumber" ColumnName="MaxCustomersNumber" />
+                <ScalarProperty Name="PotentialCustomers" ColumnName="PotentialCustomers" />
+                <ScalarProperty Name="EmployerId" ColumnName="EmployerId" />
+                <ScalarProperty Name="FIOEmployer" ColumnName="FIOEmployer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="actual_tours">
+            <EntityTypeMapping TypeName="Tourist_Model.actual_tours">
+              <MappingFragment StoreEntitySet="actual_tours">
+                <ScalarProperty Name="TourId" ColumnName="TourId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DateOfStart" ColumnName="DateOfStart" />
+                <ScalarProperty Name="DateOfEnd" ColumnName="DateOfEnd" />
+                <ScalarProperty Name="TransportMethods" ColumnName="TransportMethods" />
+                <ScalarProperty Name="PaidCustomers" ColumnName="PaidCustomers" />
+                <ScalarProperty Name="MaxCustomersNumber" ColumnName="MaxCustomersNumber" />
+                <ScalarProperty Name="PotentialCustomers" ColumnName="PotentialCustomers" />
+                <ScalarProperty Name="EmployerId" ColumnName="EmployerId" />
+                <ScalarProperty Name="FIOEmployer" ColumnName="FIOEmployer" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="v_employees">
+            <EntityTypeMapping TypeName="Tourist_Model.v_employees">
+              <MappingFragment StoreEntitySet="v_employees">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_Of_Country" ColumnName="Name Of Country" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="EmployerId" ColumnName="EmployerId" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="TourId" ColumnName="TourId" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Date_Of_Employment" ColumnName="Date Of Employment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="Хранилище Tourist_Model.popular_tour" FunctionImportName="popular_tour">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Tourist_Model.popular_tour_Result">
+                <ScalarProperty Name="TourId" ColumnName="TourId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DateOfStart" ColumnName="DateOfStart" />
+                <ScalarProperty Name="DateOfEnd" ColumnName="DateOfEnd" />
+                <ScalarProperty Name="TransportMethods" ColumnName="TransportMethods" />
+                <ScalarProperty Name="PaidCustomers" ColumnName="PaidCustomers" />
+                <ScalarProperty Name="MaxCustomersNumber" ColumnName="MaxCustomersNumber" />
+                <ScalarProperty Name="PotentialCustomers" ColumnName="PotentialCustomers" />
+                <ScalarProperty Name="EmployerId" ColumnName="EmployerId" />
+                <ScalarProperty Name="FIOEmployer" ColumnName="FIOEmployer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="Хранилище Tourist_Model.unpopular_tour" FunctionImportName="unpopular_tour">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Tourist_Model.unpopular_tour_Result">
+                <ScalarProperty Name="TourId" ColumnName="TourId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DateOfStart" ColumnName="DateOfStart" />
+                <ScalarProperty Name="DateOfEnd" ColumnName="DateOfEnd" />
+                <ScalarProperty Name="TransportMethods" ColumnName="TransportMethods" />
+                <ScalarProperty Name="PaidCustomers" ColumnName="PaidCustomers" />
+                <ScalarProperty Name="MaxCustomersNumber" ColumnName="MaxCustomersNumber" />
+                <ScalarProperty Name="PotentialCustomers" ColumnName="PotentialCustomers" />
+                <ScalarProperty Name="EmployerId" ColumnName="EmployerId" />
+                <ScalarProperty Name="FIOEmployer" ColumnName="FIOEmployer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="diap_start_date" FunctionName="Хранилище Tourist_Model.diap_start_date">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Tourist_Model.diap_start_date_Result">
+                <ScalarProperty Name="TourId" ColumnName="TourId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DateOfStart" ColumnName="DateOfStart" />
+                <ScalarProperty Name="DateOfEnd" ColumnName="DateOfEnd" />
+                <ScalarProperty Name="TransportMethods" ColumnName="TransportMethods" />
+                <ScalarProperty Name="PaidCustomers" ColumnName="PaidCustomers" />
+                <ScalarProperty Name="MaxCustomersNumber" ColumnName="MaxCustomersNumber" />
+                <ScalarProperty Name="PotentialCustomers" ColumnName="PotentialCustomers" />
+                <ScalarProperty Name="EmployerId" ColumnName="EmployerId" />
+                <ScalarProperty Name="FIOEmployer" ColumnName="FIOEmployer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="in_tour" FunctionName="Хранилище Tourist_Model.in_tour" />
+          <FunctionImportMapping FunctionImportName="popular_arc_tour" FunctionName="Хранилище Tourist_Model.popular_arc_tour">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Tourist_Model.popular_arc_tour_Result">
+                <ScalarProperty Name="TourId" ColumnName="TourId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DateOfStart" ColumnName="DateOfStart" />
+                <ScalarProperty Name="DateOfEnd" ColumnName="DateOfEnd" />
+                <ScalarProperty Name="TransportMethods" ColumnName="TransportMethods" />
+                <ScalarProperty Name="PaidCustomers" ColumnName="PaidCustomers" />
+                <ScalarProperty Name="MaxCustomersNumber" ColumnName="MaxCustomersNumber" />
+                <ScalarProperty Name="PotentialCustomers" ColumnName="PotentialCustomers" />
+                <ScalarProperty Name="EmployerId" ColumnName="EmployerId" />
+                <ScalarProperty Name="FIOEmployer" ColumnName="FIOEmployer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="popular_country" FunctionName="Хранилище Tourist_Model.popular_country" />
+          <FunctionImportMapping FunctionImportName="popular_tourist" FunctionName="Хранилище Tourist_Model.popular_tourist" />
+          <FunctionImportMapping FunctionImportName="show_list" FunctionName="Хранилище Tourist_Model.show_list" />
+          <FunctionImportMapping FunctionImportName="transport_method" FunctionName="Хранилище Tourist_Model.transport_method">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Tourist_Model.transport_method_Result">
+                <ScalarProperty Name="TourId" ColumnName="TourId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DateOfStart" ColumnName="DateOfStart" />
+                <ScalarProperty Name="DateOfEnd" ColumnName="DateOfEnd" />
+                <ScalarProperty Name="TransportMethods" ColumnName="TransportMethods" />
+                <ScalarProperty Name="PaidCustomers" ColumnName="PaidCustomers" />
+                <ScalarProperty Name="MaxCustomersNumber" ColumnName="MaxCustomersNumber" />
+                <ScalarProperty Name="PotentialCustomers" ColumnName="PotentialCustomers" />
+                <ScalarProperty Name="EmployerId" ColumnName="EmployerId" />
+                <ScalarProperty Name="FIOEmployer" ColumnName="FIOEmployer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="visit_country" FunctionName="Хранилище Tourist_Model.visit_country" />
+          <FunctionImportMapping FunctionImportName="where_is_tourist" FunctionName="Хранилище Tourist_Model.where_is_tourist" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
